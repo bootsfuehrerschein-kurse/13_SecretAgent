@@ -239,10 +239,10 @@ footer h2{
   .container_product{
     width: 47%;
     /*margin-right: 3.6%; <-- this is good for larger screens (like 1000px)*/
-    margin-right: 1%; /* <-- this works for the whole range, but has too much margin at the right for larger screens :(*/
+    margin-right: 3.6%; /* <-- this works for the whole range, but has too much margin at the right for larger screens :(*/
   }
 
-  .container_product.no_margin_right{
+  .container_product.hidden_small{
     margin-right: 0px;
   }
 
