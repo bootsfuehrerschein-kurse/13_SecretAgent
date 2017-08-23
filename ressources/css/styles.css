@@ -10,7 +10,7 @@ body{
 .container_size{
   width: 960px;
   margin: auto;
-  border: 1px solid green;
+  /*border: 1px solid green;*/
 }
 
 /************************header****************************/
@@ -18,7 +18,7 @@ body{
 header{
   background-color: black;
   display: block;
-  border: 1px solid red;
+  /*border: 1px solid red;*/
 }
 
 header img{
@@ -27,7 +27,7 @@ header img{
   margin-left: 0.5rem;
   /*vertical-align steht im child, nicht im parent wie bei flexbox*/
   vertical-align: middle;
-  border: 1px solid green;
+  /*border: 1px solid green;*/
 }
 
 header h2{
@@ -38,7 +38,7 @@ header h2{
   font-size: 18px;
   display: inline-block;
   vertical-align: middle;
-  border: 1px solid green;
+  /*border: 1px solid green;*/
 }
 
 /************************banner****************************/
@@ -49,7 +49,7 @@ header h2{
   background-size:cover;
   background-repeat: no-repeat;
   background-position: center;
-  border: 1px solid yellow;
+  border-top: 1px solid black;
 }
 
 .container_banner{
@@ -80,7 +80,7 @@ header h2{
 
 nav{
   background-color: firebrick;
-  border: 1px solid white;
+  /*border: 1px solid white;*/
   width: inherit;
 }
 
@@ -89,12 +89,13 @@ nav{
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
   text-align:center;
-  border: 1px solid blue;
-  padding-right: 105.9px; /* variable width */
+  /*border: 1px solid blue;*/
+  padding-right: 109px; /* variable width */
 }
 
 .nav_item:last-child{
   padding-right: 0px;
+  float: right;
 }
 
 nav a{
@@ -108,21 +109,27 @@ nav a{
   padding-bottom: 3rem;
   width: 960px;
   margin: auto;
-  border: 1px solid blue;
+  /*border: 2px solid yellow;*/
 }
 
 .container_product{
   display: inline-block;
   border: 4px solid black;
   margin: 0px;
-  margin-right: 3.2%;
   width: 30%;
-  /*in order to center the images:*/
   text-align: center;
 }
 
+.container_product:first-child{
+  float: left;
+}
+
+.container_product.hidden_small{
+  margin: 0 36px;
+}
+
 .container_product:last-child{
-  margin-right: 0px;
+  float: right;
 }
 
 .container_product_image{
@@ -130,18 +137,23 @@ nav a{
   height: 9rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  border: 1px solid brown;
+  /*border: 1px solid brown;*/
 }
 
 .container_product img{
   display: inline-block;
-  /*this does not work:*/
-  vertical-align: middle;
+  /*this does not work:
+  vertical-align: middle;*/
   /*Because: This property (vertical-align) does not allow you to "vertically center" an element within another element. Flexbox is more of the proper tool there. However, there is a trick involving a pseudo "ghost" element that can allow this to work.*/
   /*apparently, a lot of hacking would be necessary, to achieve this goal => using flexbox will be much better*/
   max-height: 9rem;
   max-width: 9rem;
-  border: 1px solid grey;
+  /*border: 1px solid grey;*/
+}
+
+/*instead of hacking and instead of flexbox, workaround:*/
+.container_product:last-child img{
+  padding-top: 2.5rem;
 }
 
 .container_product h2{
@@ -158,18 +170,24 @@ nav a{
 .container_size_info{
   width: 960px;
   margin: auto;
-  border: 1px solid green;
+  /*hier ist padding noetig, sonst ist die box fuer container_size_info zu klein!
+  nur bei desktop, bei medium und small greift clear_float und es ist nicth noetig...macht keinen sinn....*/
+  padding-bottom: 4rem;
+  /*border: 2px solid red;*/
 }
 
 .container_info{
   display: inline-block;
   width: 35%;
-  border: 1px solid green;
-  margin-right: 29%;
+  /*border: 2px solid orange;*/
+}
+
+.container_info:first-child{
+  float: left;
 }
 
 .container_info:last-child{
-  margin-right: 0px;
+  float: right;
 }
 
 .black_box{
@@ -192,7 +210,7 @@ nav a{
 
 footer{
   height: 5rem;
-  margin-top: 4rem;
+  margin-top: 4rem; /*hier ist der abstand vor footer*/
   background-color: black;
   text-align: left;
 }
@@ -228,7 +246,12 @@ footer h2{
   }
 
   nav .small {
+    /*display: block;*/
     text-align: center;
+  }
+
+  .nav_item:last-child{
+    float: none;
   }
 
   /*products*/
@@ -236,25 +259,45 @@ footer h2{
     width: 100%;
   }
 
-  .container_product{
+  .container_product.first{
+    /*float: left; nicht noetig, da float: left vererbt wird*/
     width: 47%;
-    /*margin-right: 3.6%; <-- this is good for larger screens (like 1000px)*/
-    margin-right: 3.6%; /* <-- this works for the whole range, but has too much margin at the right for larger screens :(*/
   }
 
   .container_product.hidden_small{
-    margin-right: 0px;
+    margin: 0;
+    float: right;
+    width: 47%;
+  }
+
+  /*wenn nur float, dann passt sich der container nicht an! daher dieser fix (aus codeschool):*/
+  .clear_float:before,
+  .clear_float:after{
+    content: "";
+    display: table;
+  }
+
+  .clear_float:after{
+    clear: both;
   }
 
   /*info*/
   .container_size_info{
     width: 100%;
+    /*da hier clear_float greift darf hier kein padding sein!*/
+    padding-bottom: 0;
   }
 
-  .container_info{
-    /*margin-right: 28.9%;*/
-    margin-right: 28%;
+  footer{
+    height: 5rem;
+    text-align: left;
   }
+
+  footer h2{
+    display: inline-block;
+    margin-top: 2rem;
+  }
+
 }
 
 @media only screen and (max-width: 470px){
@@ -271,6 +314,7 @@ footer h2{
 
   .container_banner{
     margin-top: 10rem;
+    width: 100%;
   }
 
   .container_banner h2, .container_banner h1{
@@ -287,6 +331,10 @@ footer h2{
     margin-bottom: 1rem;
   }
 
+  .container_banner h2, .container_banner h1{
+    margin-left: 2rem;
+  }
+
   /*products*/
   .container_size_product{
     width: 90%;
@@ -294,7 +342,11 @@ footer h2{
   }
 
   .container_product{
-    width: 98%;
+    width: 100%;
+  }
+
+  .container_product.first{
+    width: 100%;
   }
 
   /*info*/
@@ -308,7 +360,12 @@ footer h2{
     margin: auto;
   }
 
+  .container_info:first-child{
+    float: left;
+  }
+
   .container_info:last-child{
+    float: none;
     margin-top: 0.5rem;
   }
 
